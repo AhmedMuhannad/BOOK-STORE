@@ -89,7 +89,7 @@ export default function Login() {
         </form>
         <p className="text-center mt-4">
           Don't have an account?{" "}
-          <a href="#" className="text-blue-500 underline">
+          <a href="/SignUp" className="text-blue-500 underline">
             Signup
           </a>
         </p>

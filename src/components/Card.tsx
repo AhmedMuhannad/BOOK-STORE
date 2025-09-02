@@ -6,7 +6,7 @@ export default function Card(book: any) {
   const location = useLocation();
   const navigate = useNavigate();
   return (
-    <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
+    <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full mt-10">
       <div className="group cursor-pointer flex items-center justify-center px-2">
         <img
           onClick={() => {

@@ -4,10 +4,14 @@ import { useEffect, useState } from "react";
 import { getBookById } from "../api/booksApi";
 import type Book from "../interface/Book";
 import { addToCart } from "../api/cartApi";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import SimilarSlider from "../components/SimilarSlider";
 export default function Details() {
   const [book, setBooks] = useState<Book>();
+
   const location = useLocation();
-  console.log(location.state);
+  console.log(location.state.item);
   console.log("HI");
   const navigate = useNavigate();
   async function addItem(id: string, quantity: number) {
@@ -32,11 +36,15 @@ export default function Details() {
   const Details = () => {
     return (
       book && (
-        <div className="max-w-6xl w-full px-6">
-          <div className="flex flex-col md:flex-row gap-16 mt-4">
-            <div className="flex gap-3">
-              <div className="border border-gray-500/30 max-w-100 rounded overflow-hidden">
-                <img src={book.coverImage} alt="Selected product" />
+        <div className="max-w-6xl  w-full px-6">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-16 mt-4">
+            <div className="flex justify-center md:justify-start">
+              <div className="border border-gray-500/30 rounded  w-full max-w-xs md:max-w-sm lg:max-w-md">
+                <img
+                  src={book.coverImage}
+                  alt={book.title}
+                  className="w-full h-auto lg:w-[340px]   "
+                />
               </div>
             </div>
 
@@ -87,13 +95,6 @@ export default function Details() {
                   })} */}
                 {/* <p className="text-base ml-2">({product.rating})</p> */}
               </div>
-              <div className="mt-6">
-                <p className="text-gray-500/70 line-through"></p>
-                <p className="text-2xl font-medium"></p>
-                <span className="text-gray-500/70">
-                  (inclusive of all taxes)
-                </span>
-              </div>
 
               <p className="text-base font-medium mt-6">About The Book</p>
               <h3>{book.description}</h3>
@@ -136,8 +137,11 @@ export default function Details() {
   return (
     <>
       <NavBar />
-      <div className="flex justify-center items-center h-screen w-screen">
+      <div className="flex pt-20  justify-center flex-col items-start md:items-center w-full py-8 md:py-0  md:mt-8">
+        {/* <div className=" my-120 lg:my-40 md:my-80 sm:my-100 xs:my-120"></div> */}
         <Details />
+        <SimilarSlider id={location.state.item} />
+        {/* <SimilarBooks /> */}
       </div>
     </>
   );

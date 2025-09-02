@@ -1,7 +1,5 @@
-import React, { useState, useMemo, useEffect } from "react";
-import NavBar from "../components/Navbar";
-import { getCart, removeFromCart, addToCart } from "../api/cartApi";
-// Define the type for a cart item
+import React, { useState, useEffect } from "react";
+import { getCart, addToCart, removeFromCart } from "../api/cartApi";
 
 interface CartItem {
   book: {
@@ -11,129 +9,239 @@ interface CartItem {
   };
   quantity: number;
 }
+
 const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  async function addItem(id: string) {
-    try {
-      await addToCart(id, 1);
-      setCartItems(cartItems);
-    } catch (err) {}
-  }
+  const [showAddress, setShowAddress] = useState(false);
 
-  async function removeItem(id: string) {
-    try {
-      await removeFromCart(id);
-    } catch (err) {
-      console.error("Error removing from cart:", err);
-    }
-  }
-
+  // ✅ Fetch Cart Data
   useEffect(() => {
     async function fetchCart() {
       try {
         const res = await getCart();
         setCartItems(res.cart.items);
-        console.log("Cart data:", res.cart.items);
       } catch (err) {
         console.error("Failed to fetch cart:", err);
       }
     }
     fetchCart();
   }, []);
-  console.log(cartItems);
-  return (
-    <>
-      <NavBar />
-      <div className="min-h-screen my-20 bg-gray-900 p-4 font-sans text-gray-200 antialiased">
-        <div className="mx-auto max-w-4xl rounded-3xl bg-gray-800 p-6 shadow-2xl">
-          <h1 className="mb-8 text-4xl font-extrabold text-white">
-            Your Shopping Cart
-          </h1>
 
-          {cartItems.length === 0 ? (
-            <div className="rounded-xl bg-gray-700 p-8 text-center text-gray-400">
-              <p className="text-lg">Your cart is currently empty.</p>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {cartItems.map((item) => (
-                <div
-                  key={item.book._id}
-                  className="flex flex-col items-center gap-6 rounded-xl bg-gray-700 p-6 sm:flex-row"
-                >
+  // ✅ Add Item (Increase Quantity)
+  async function addItem(id: string) {
+    try {
+      await addToCart(id, 1);
+      const res = await getCart(); // refresh cart after adding
+      setCartItems(res.cart.items);
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+    }
+  }
+
+  // ✅ Remove Item (Decrease Quantity or Delete)
+  async function removeItem(id: string) {
+    try {
+      await removeFromCart(id);
+      const res = await getCart(); // refresh cart after removing
+      setCartItems(res.cart.items);
+    } catch (err) {
+      console.error("Error removing from cart:", err);
+    }
+  }
+
+  return (
+    <div className="flex flex-col md:flex-row py-16 max-w-6xl w-full px-6 mx-auto">
+      {/* ✅ LEFT SIDE - Cart Items */}
+      <div className="flex-1 max-w-4xl">
+        <h1 className="text-3xl font-medium mb-6">
+          Shopping Cart{" "}
+          <span className="text-sm text-indigo-500">
+            {cartItems.length} Items
+          </span>
+        </h1>
+
+        <div className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 text-base font-medium pb-3">
+          <p className="text-left">Product Details</p>
+          <p className="text-center">Subtotal</p>
+          <p className="text-center">Action</p>
+        </div>
+
+        {cartItems.length === 0 ? (
+          <p className="text-gray-400 mt-4">Your cart is currently empty.</p>
+        ) : (
+          cartItems.map((item) => (
+            <div
+              key={item.book._id}
+              className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 items-center text-sm md:text-base font-medium pt-3"
+            >
+              <div className="flex items-center md:gap-6 gap-3">
+                <div className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded overflow-hidden">
                   <img
+                    className="max-w-full h-full object-cover"
                     src={item.book.coverImage}
                     alt={item.book.title}
-                    className="h-28 w-28 flex-shrink-0 rounded-xl object-cover shadow-lg"
                   />
-                  <div className="flex flex-1 flex-col items-center sm:items-start">
-                    <h2 className="text-xl font-semibold text-white">
-                      {item.book.title}
-                    </h2>
-                    {/* <p className="text-gray-400">${item.price.toFixed(2)}</p> */}
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => {
-                        removeFromCart(item.book._id);
-                      }}
-                      className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-600 bg-gray-800 text-lg text-gray-300 transition-colors duration-200 ease-in-out hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-                      aria-label={`Decrease quantity of ${item.book.title}`}
-                    >
-                      -
-                    </button>
-                    <span className="w-8 text-center text-lg font-medium">
-                      {item.quantity}
-                    </span>
-                    <button
-                      onClick={() => {
-                        addItem(item.book._id);
-                      }}
-                      className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-600 bg-gray-800 text-lg text-gray-300 transition-colors duration-200 ease-in-out hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-                      aria-label={`Increase quantity of ${item.book.title}`}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <button
-                    onClick={() => {
-                      console.log(item.book._id);
-                      removeItem(item.book._id);
-                    }}
-                    className="flex-shrink-0 rounded-lg p-2 text-gray-400 transition-colors duration-200 ease-in-out hover:text-red-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="h-6 w-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m-1.022.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165M12 2.25h.001M12 5.25h.001M12 8.25h.001M12 11.25h.001M12 14.25h.001"
-                      />
-                    </svg>
-                  </button>
                 </div>
-              ))}
+                <div>
+                  <p className="hidden md:block font-semibold">
+                    {item.book.title}
+                  </p>
+                  <div className="font-normal text-gray-500/70">
+                    <div className="flex items-center">
+                      <p>Qty:</p>
+                      <select
+                        value={item.quantity}
+                        onChange={(e) => {
+                          const newQty = parseInt(e.target.value);
+                          if (newQty > item.quantity) {
+                            addItem(item.book._id);
+                          } else {
+                            removeItem(item.book._id);
+                          }
+                        }}
+                        className="outline-none"
+                      >
+                        {Array(5)
+                          .fill("")
+                          .map((_, index) => (
+                            <option key={index} value={index + 1}>
+                              {index + 1}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p className="text-center">${item.quantity * 20}</p>
+              <button
+                className="cursor-pointer mx-auto"
+                onClick={() => removeItem(item.book._id)}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m12.5 7.5-5 5m0-5 5 5m5.833-2.5a8.333 8.333 0 1 1-16.667 0 8.333 8.333 0 0 1 16.667 0"
+                    stroke="#FF532E"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
             </div>
-          )}
+          ))
+        )}
 
-          <div className="mt-10 flex flex-col items-end gap-5 rounded-2xl border-t border-gray-700 pt-6">
-            <div className="flex w-full justify-between text-2xl font-bold">
-              <span className="text-gray-300">Subtotal:</span>
-              {/* <span className="text-teal-400">${cartTotal.toFixed(2)}</span> */}
-            </div>
-            <button className="w-full rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 px-8 py-4 text-xl font-bold text-white shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.03] hover:shadow-xl focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-500 sm:w-auto">
-              Proceed to Checkout
-            </button>
-          </div>
-        </div>
+        <button className="group cursor-pointer flex items-center mt-8 gap-2 text-indigo-500 font-medium">
+          <svg
+            width="15"
+            height="11"
+            viewBox="0 0 15 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1"
+              stroke="#615fff"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Continue Shopping
+        </button>
       </div>
-    </>
+
+      {/* ✅ RIGHT SIDE - Order Summary */}
+      <div className="max-w-[360px] w-full bg-gray-100/40 p-5 max-md:mt-16 border border-gray-300/70">
+        <h2 className="text-xl md:text-xl font-medium">Order Summary</h2>
+        <hr className="border-gray-300 my-5" />
+
+        <div className="mb-6">
+          <p className="text-sm font-medium uppercase">Delivery Address</p>
+          <div className="relative flex justify-between items-start mt-2">
+            <p className="text-gray-500">No address found</p>
+            <button
+              onClick={() => setShowAddress(!showAddress)}
+              className="text-indigo-500 hover:underline cursor-pointer"
+            >
+              Change
+            </button>
+            {showAddress && (
+              <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
+                <p
+                  onClick={() => setShowAddress(false)}
+                  className="text-gray-500 p-2 hover:bg-gray-100"
+                >
+                  New York, USA
+                </p>
+                <p
+                  onClick={() => setShowAddress(false)}
+                  className="text-indigo-500 text-center cursor-pointer p-2 hover:bg-indigo-500/10"
+                >
+                  Add address
+                </p>
+              </div>
+            )}
+          </div>
+
+          <p className="text-sm font-medium uppercase mt-6">Payment Method</p>
+
+          <select className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
+            <option value="COD">Cash On Delivery</option>
+            <option value="Online">Online Payment</option>
+          </select>
+        </div>
+
+        <hr className="border-gray-300" />
+
+        <div className="text-gray-500 mt-4 space-y-2">
+          <p className="flex justify-between">
+            <span>Price</span>
+            <span>
+              ${cartItems.reduce((acc, item) => acc + item.quantity * 20, 0)}
+            </span>
+          </p>
+          <p className="flex justify-between">
+            <span>Shipping Fee</span>
+            <span className="text-green-600">Free</span>
+          </p>
+          <p className="flex justify-between">
+            <span>Tax (2%)</span>
+            <span>
+              $
+              {(
+                (cartItems.reduce((acc, item) => acc + item.quantity * 20, 0) *
+                  2) /
+                100
+              ).toFixed(2)}
+            </span>
+          </p>
+          <p className="flex justify-between text-lg font-medium mt-3">
+            <span>Total Amount:</span>
+            <span>
+              $
+              {(
+                cartItems.reduce((acc, item) => acc + item.quantity * 20, 0) +
+                (cartItems.reduce((acc, item) => acc + item.quantity * 20, 0) *
+                  2) /
+                  100
+              ).toFixed(2)}
+            </span>
+          </p>
+        </div>
+
+        <button className="w-full py-3 mt-6 cursor-pointer bg-indigo-500 text-white font-medium hover:bg-indigo-600 transition">
+          Place Order
+        </button>
+      </div>
+    </div>
   );
 };
 

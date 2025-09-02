@@ -1,4 +1,5 @@
 export default interface Book {
+  [x: string]: any;
   _id: string;
   title: string;
   description: string;

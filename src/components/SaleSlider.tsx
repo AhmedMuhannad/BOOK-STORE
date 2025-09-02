@@ -7,7 +7,7 @@ import { getBooks } from "../api/booksApi";
 import type Book from "../interface/Book";
 
 export default function SaleSlider() {
-  const settings = {
+    const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -60,7 +60,7 @@ export default function SaleSlider() {
   };
   return (
     <div className="slider-container px-4">
-      <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">
+      <h2 className="mx-auto px-4 text-3xl font-semibold md:px-16 lg:px-24 xl:px-32 mb-6">
         Top Selling
       </h2>
       <Slider {...settings}>

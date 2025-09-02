@@ -30,3 +30,11 @@ export const getBooksByCategory = async (
     throw err;
   }
 };
+export const getSimilarBooks = async (bookId: string) => {
+  try {
+    const res = await apiBase.get(`/api/books/similar-books/${bookId}`);
+    return res;
+  } catch (err: any) {
+    throw err;
+  }
+};
