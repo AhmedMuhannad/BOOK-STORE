@@ -24,7 +24,11 @@ export default function HeroSection() {
             journey with us.
           </p>
           <div className="flex items-center gap-4 mt-6">
-            <button onClick={handleClick} className="btn-primary" type="button">
+            <button
+              onClick={handleClick}
+              className="px-5 py-3 rounded-md bg-white text-indigo-600 border border-indigo-400 flex items-center gap-2 hover:bg-indigo-600/5 active:scale-95 transition-all"
+              type="button"
+            >
               <svg
                 width="16"
                 height="15"
