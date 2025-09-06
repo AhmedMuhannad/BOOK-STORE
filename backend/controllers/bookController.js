@@ -50,6 +50,19 @@ exports.getCategoriesOfBook = async (req, res) => {
   });
 };
 
+exports.getSimilarBooks = async (req, res) => {
+  const currentBookId = req.params.id;
+  const currentBook = await Book.findById(currentBookId);
+  const books = await Book.find({
+    categories: { $in: currentBook.categories },
+    _id: { $ne: currentBookId }, // exclude current book
+  }).limit(5);
+  res.status(200).json({
+    message: "success",
+    data: books,
+  });
+};
+
 exports.getBookByName = async (req, res) => {
   const { name } = req.params;
   const book = await Book.findOne({ title: name })
@@ -73,9 +86,7 @@ exports.getCategoryBooks = async (req, res) => {
   const books = await Book.find({ categories: { $in: req.params.id } });
   res.status(200).json({
     status: "success",
-    data: {
-      books,
-    },
+    data: books,
   });
 };
 

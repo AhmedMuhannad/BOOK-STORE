@@ -6,92 +6,12 @@ import type Book from "../interface/Book";
 import { addToCart } from "../api/cartApi";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import React from "react";
-import { getBooks } from "../api/booksApi";
-import Slider from "react-slick";
-
-function SimilarBooks(){
-  {
-    const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-    ],
-  };
-  const [books, setBooks] = React.useState<Book[]>([]);
-  React.useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const res = await getBooks();
-        setBooks(res.data.books);
-      } catch (error) {
-        console.error("Error fetching books:", error);
-      }
-    };
-    fetchBooks();
-  }, []);
-  //   console.log(books);
-  const navigate = useNavigate();
-  const handleItemClick = (item: string) => {
-    navigate(`${item}/Details`, { state: { item } });
-  };
-  return (
-    <div className="slider-container px-4 w-full mt-12">
-      <h2 className="mx-auto px-4 text-3xl font-semibold md:px-16 lg:px-24 xl:px-32 mb-6">
-        Top Selling
-      </h2>
-      <Slider {...settings}>
-        {books.map((item) => (
-          <div key={item._id} className="px-4">
-            <div
-              className="w-32 h-32 cursor-pointer rounded-full bg-gradient-to-l from-indigo-500 via-indigo-400 to-indigo-300 flex items-center justify-center mx-auto"
-              onClick={() => {
-                handleItemClick(item._id);
-              }}
-            >
-              <img src={item.coverImage} alt="" />
-            </div>
-          </div>
-        ))}
-      </Slider>
-    </div>
-  );
-}
-
-}
-
+import SimilarSlider from "../components/SimilarSlider";
 export default function Details() {
   const [book, setBooks] = useState<Book>();
+
   const location = useLocation();
-  console.log(location.state);
+  console.log(location.state.item);
   console.log("HI");
   const navigate = useNavigate();
   async function addItem(id: string, quantity: number) {
@@ -116,11 +36,15 @@ export default function Details() {
   const Details = () => {
     return (
       book && (
-        <div className="max-w-6xl w-full px-6">
+        <div className="max-w-6xl  w-full px-6">
           <div className="flex flex-col md:flex-row gap-8 md:gap-16 mt-4">
             <div className="flex justify-center md:justify-start">
-              <div className="border border-gray-500/30 rounded overflow-hidden w-full max-w-xs md:max-w-sm lg:max-w-md">
-                <img src={book.coverImage} alt={book.title} className="w-full h-auto object-contain max-h-[500px]" />
+              <div className="border border-gray-500/30 rounded  w-full max-w-xs md:max-w-sm lg:max-w-md">
+                <img
+                  src={book.coverImage}
+                  alt={book.title}
+                  className="w-full h-auto lg:w-[340px]   "
+                />
               </div>
             </div>
 
@@ -213,10 +137,9 @@ export default function Details() {
   return (
     <>
       <NavBar />
-      <div className="flex justify-center flex-col h-screen items-start md:items-center w-full py-8 md:py-0 overflow-y-scroll md:mt-8">
-        <div className=" my-120 lg:my-40 md:my-80 sm:my-100 xs:my-120"></div>
+      <div className="flex pt-20  justify-center flex-col items-start md:items-center w-full py-8 md:py-0  md:mt-8">
         <Details />
-        <SimilarBooks/>
+        <SimilarSlider id={location.state.item} />
       </div>
     </>
   );

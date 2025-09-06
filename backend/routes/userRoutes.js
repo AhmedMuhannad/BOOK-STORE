@@ -10,7 +10,7 @@ router
   .get(authMiddleware.protect, usreController.getUserProfile)
   .put(authMiddleware.protect, usreController.updateUserProfile);
 router.post("/register", usreController.registerUser);
-router.get("/refresh-token", usreController.authRefreshToken);
+router.get("/refresh-token/", usreController.authRefreshToken);
 // router
 //   .route("/:id")ss
 //   .delete(usreController.deleteUser)

@@ -9,11 +9,11 @@ import { useContext } from "react";
 import { getBooks } from "../api/booksApi";
 import { logoutUser } from "../api/userApi";
 import { setAvatar } from "../features/ProfileSlice";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import type { RootState } from "../App/store";
 
 export default function NavBar() {
-  const Avatar=useSelector((state:RootState)=>state.ProfileSlice.Avatar)
+  const Avatar = useSelector((state: RootState) => state.ProfileSlice.Avatar);
   const [data, setData] = React.useState([]);
   const navLinks = [
     { name: "Home", path: "/" },
@@ -60,10 +60,7 @@ export default function NavBar() {
   function handleClickLogin(): void {
     if (auth) {
       navigate("/");
-    }
-    else {
-      navigate("/login")
-    }
+    } 
   }
 
   const ref = React.useRef<HTMLDivElement>(null);
@@ -89,10 +86,11 @@ export default function NavBar() {
   console.log(data);
   return (
     <nav
-      className={`fixed w-100 top-0 left-0 bg-indigo-500 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500  z-50 ${isScrolled
-        ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4"
-        : "py-4 md:py-6"
-        }`}
+      className={`sticky  bg-indigo-500 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500  z-50 ${
+        isScrolled
+          ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4"
+          : "py-4 md:py-6"
+      }`}
     >
       {/* Desktop Nav */}
       <div className="hidden md:flex items-center gap-4 lg:gap-8 mr-4">
@@ -100,13 +98,15 @@ export default function NavBar() {
           <a
             key={i}
             href={link.path}
-            className={`group flex flex-col gap-0.5 ${isScrolled ? "text-gray-700" : "text-white"
-              }`}
+            className={`group flex flex-col gap-0.5 ${
+              isScrolled ? "text-gray-700" : "text-white"
+            }`}
           >
             {link.name}
             <div
-              className={`${isScrolled ? "bg-gray-700" : "bg-white"
-                } h-0.5 w-0 group-hover:w-full transition-all duration-300`}
+              className={`${
+                isScrolled ? "bg-gray-700" : "bg-white"
+              } h-0.5 w-0 group-hover:w-full transition-all duration-300`}
             />
           </a>
         ))}
@@ -164,30 +164,37 @@ export default function NavBar() {
             )}
           </div>
         </div>
-        <button
-          className={`px-1 py-2.5 cursor-pointer rounded-full ml-4 transition-all duration-500 flex flex-row justify-between items-center gap-2 ${isScrolled ? "text-white bg-black" : "bg-white text-black"
-            }`}
+
+        {auth ? (
+          <img
+            className="h-15 w-15 rounded-full ml-4 hover:cursor-pointer"
+            src={Avatar}
+            alt="userImage1"
+            onClick={() => {
+              navigate("/Settings");
+            }}
+          />
+        ) : (
+          <p></p>
+        )}
+        {!auth ? (<button
+          className="bg-white text-black px-8 py-2.5 rounded-full transition-all duration-500 flex flex-row justify-between items-center gap-2"
           onClick={() => {
             handleAuthClick();
           }}
         >
-          {auth ? "LogOut" : "Login"}  {auth ? <IoLogOutOutline /> : <IoLogInOutline />}
-        </button>
-        {auth ? (<img className="h-15 w-15 rounded-full ml-4 hover:cursor-pointer"
-          src={Avatar}
-          alt="userImage1"
-          onClick={() => {
-            navigate("/Profile")
-          }} />) : (<p></p>)}
+          Login
+          <IoLogInOutline />
+        </button>): (<p></p>)}
       </div>
 
       {/* Mobile Menu Button */}
       <div className="flex items-center justify-between w-full gap-3 md:hidden">
-        
         <svg
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`h-6 w-6 cursor-pointer ${isScrolled ? "invert" : ""
-            } text-white`}
+          className={`h-6 w-6 cursor-pointer ${
+            isScrolled ? "invert" : ""
+          } text-white`}
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -199,7 +206,7 @@ export default function NavBar() {
         </svg>
         <div className="relative ml-auto flex items-center border pl-3 gap-2 bg-white border-gray-500/30  rounded-md  max-w-md w-2/3 h-[40px]">
           <svg
-          className="absolute"
+            className="absolute"
             xmlns="http://www.w3.org/2000/svg"
             width="22"
             height="22"
@@ -251,10 +258,10 @@ export default function NavBar() {
       </div>
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-screen bg-white text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`fixed top-0 left-0 w-full h-screen bg-white text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 transition-all duration-500 ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
-        
         <button
           className="absolute top-4 right-4"
           title="menu"
@@ -271,17 +278,18 @@ export default function NavBar() {
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
-        <img className="h-15 w-15 rounded-full hover:cursor-pointer"
+        <img
+          className="h-15 w-15 rounded-full hover:cursor-pointer"
           src={Avatar}
           alt="userImage1"
           onClick={() => {
-            navigate("/Profile")
-          }} />
+            navigate("/Profile");
+          }}
+        />
         {navLinks.map((link, i) => (
           <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)}>
             {link.name}
           </a>
-
         ))}
 
         <button
@@ -289,7 +297,10 @@ export default function NavBar() {
           onClick={() => {
             handleAuthClick();
           }}
-        >{auth ? "LogOut" : "Login"} {auth ? <IoLogOutOutline /> : <IoLogInOutline />}</button>
+        >
+          {!auth ? "Login" : ""}
+          {!auth ? (<IoLogInOutline />) :(<p></p>) }
+        </button>
       </div>
     </nav>
   );

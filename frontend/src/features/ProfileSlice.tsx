@@ -1,24 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-
-const ProfileSlice=createSlice({
-    name:'Profile',
-    initialState:{
-        name:"",
-    bio:"",
-    Avatar:"https://lh3.googleusercontent.com/a/default-user"
+const ProfileSlice = createSlice({
+    name: 'Profile',
+    initialState: {
+        firstName: "Guest",
+        secondName: "",
+        Avatar: "https://lh3.googleusercontent.com/a/default-user",
+        selectedCountry:"",
     },
-    reducers:{
-        setName:(state,action:PayloadAction<string>)=>{
-            state.name=action.payload
+    reducers: {
+        setFirstName: (state, action: PayloadAction<string>) => {
+            state.firstName = action.payload
         },
-        setBio:(state,action:PayloadAction<string>)=>{
-            state.bio=action.payload
+        setSecondName: (state, action: PayloadAction<string>) => {
+            state.secondName = action.payload
         },
-        setAvatar:(state,action:PayloadAction<string>)=>{
-            state.Avatar=action.payload
-        }
+        setAvatar: (state, action: PayloadAction<string>) => {
+            state.Avatar = action.payload
+        },
+        setSelectedCountry:(state,action:PayloadAction<string>)=>{
+            state.selectedCountry=action.payload
+        },
     }
 })
-export const {setName,setBio,setAvatar}=ProfileSlice.actions
+export const { setFirstName, setSecondName, setAvatar,setSelectedCountry } = ProfileSlice.actions
 export default ProfileSlice.reducer

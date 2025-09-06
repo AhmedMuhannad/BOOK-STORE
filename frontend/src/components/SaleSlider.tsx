@@ -72,7 +72,7 @@ export default function SaleSlider() {
                 handleItemClick(item._id);
               }}
             >
-              <img src={item.coverImage} alt="" />
+              <img src={item.coverImage} alt={item.title} />
             </div>
           </div>
         ))}
