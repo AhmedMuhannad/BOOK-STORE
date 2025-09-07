@@ -38,3 +38,9 @@ export const removeFromCart = async (bookId: string) => {
     throw error;
   }
 };
+export const clearCart = async () => {
+  const response = await apiBase.delete("api/cart/clear", {
+    withCredentials: true,
+  });
+  return response;
+};

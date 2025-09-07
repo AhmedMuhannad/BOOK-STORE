@@ -5,4 +5,13 @@
 @theme {
   --font-epunda: "Epunda Slab";
   --font-bebas: "Bebas Neue";
+  --color-primary: #6b4f4f;
+  --color-secondary: #d9cab3;
+  --color-accent: #a44a3f;
+  --color-background: #f2ede4;
+  --color-text: #f7f4f0;
+}
+
+body {
+  background-color: var(--color-background);
 }
