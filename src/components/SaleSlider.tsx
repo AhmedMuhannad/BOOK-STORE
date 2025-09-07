@@ -7,11 +7,11 @@ import { getBooks } from "../api/booksApi";
 import type Book from "../interface/Book";
 
 export default function SaleSlider() {
-    const settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 6,
     slidesToScroll: 4,
     initialSlide: 0,
     responsive: [
@@ -67,7 +67,7 @@ export default function SaleSlider() {
         {books.map((item) => (
           <div key={item._id} className="px-4">
             <div
-              className="w-32 h-32 cursor-pointer rounded-full bg-gradient-to-l from-indigo-500 via-indigo-400 to-indigo-300 flex items-center justify-center mx-auto"
+              className="w-32 h-48 cursor-pointer rounded-full bg-gradient-to-l from-indigo-500 via-indigo-400 to-indigo-300 flex items-center justify-center mx-auto"
               onClick={() => {
                 handleItemClick(item._id);
               }}
