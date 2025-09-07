@@ -25,20 +25,20 @@ const Category = () => {
   // console.log("Your books is: ", books);
   // console.log(location.state.category);
   return (
-    <>
+    <div className="h-screen w-screen bg-background overflow-y-scroll">
       <Navbar />
       <div className="max-w-6xl w-full px-6 pt-20">
-        <h1 className="text-4xl font-bold my-6">
+        <h1 className="text-4xl font-bold my-6 text-text">
           {location.state.category.name}
         </h1>
-        <p className="my-6">{location.state.category.description}</p>
+        <p className="my-6 text-text">{location.state.category.description}</p>
         <div className=" grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-5 2xl:grid-cols-6 md:gap-x-60 gap-x-30 gap-y-5 mt-4 mb-8">
           {books.map((book) => (
             <Card book={book} />
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

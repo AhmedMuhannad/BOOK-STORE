@@ -59,7 +59,7 @@ export default function SaleSlider() {
     navigate(`${item}/Details`, { state: { item } });
   };
   return (
-    <div className="slider-container px-4">
+    <div className="slider-container  px-4">
       <h2 className="mx-auto px-4 text-3xl font-semibold md:px-16 lg:px-24 xl:px-32 mb-6">
         Top Selling
       </h2>
@@ -67,7 +67,7 @@ export default function SaleSlider() {
         {books.map((item) => (
           <div key={item._id} className="px-4">
             <div
-              className="w-32 h-32 cursor-pointer rounded-full bg-gradient-to-l from-indigo-500 via-indigo-400 to-indigo-300 flex items-center justify-center mx-auto"
+              className="w-32 h-32 cursor-pointer rounded-full bg-gradient-to-l flex items-center justify-center mx-auto"
               onClick={() => {
                 handleItemClick(item._id);
               }}

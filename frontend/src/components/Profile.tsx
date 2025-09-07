@@ -2,8 +2,8 @@ import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { setFirstName, setSecondName, setAvatar, setSelectedCountry } from "../features/ProfileSlice";
 import { countries } from '../Data/Countries';
-
 import { MdModeEdit } from "react-icons/md";
+
 export default function Profile() {
     const dispatch = useDispatch()
     const handleSelect = (country) => {
@@ -26,16 +26,16 @@ export default function Profile() {
         }
     };
     return (
-        <div className="bg-white text-gray-500 w-1/2 h-2/3  mx-4 md:p-6 p-4 text-left text-sm rounded-xl shadow-[0px_0px_10px_0px] shadow-black/10 justify-self-center self-center">
+        <div className="bg-background text-text/80 w-1/2 h-2/3 mx-4 md:p-6 p-4 text-left text-sm rounded-xl shadow-[0px_0px_10px_0px] shadow-black/10 justify-self-center self-center">
             <div className='flex items-center'>
-                <div className="relative  group w-28 h-28 row-span-2">
+                <div className="relative group w-28 h-28 row-span-2">
                     <img
                         src={Avatar}
                         alt="User Avatar"
-                        className="w-full h-full rounded-full object-cover border-4 border-transparent group-hover:border-blue-500 transition-all duration-300"
+                        className="w-full h-full rounded-full object-cover border-4 border-transparent group-hover:border-primary transition-all duration-300"
                     />
-                    <label className="absolute inset-0 flex items-center justify-center bg-black/60 bg-opacity-50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                        <span className="text-xl "><MdModeEdit /></span>
+                    <label className="absolute inset-0 flex items-center justify-center bg-black/60 text-background rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                        <span className="text-xl"><MdModeEdit /></span>
                         <input
                             aria-label='user'
                             type="file"
@@ -46,23 +46,23 @@ export default function Profile() {
                     </label>
                 </div>
                 <div>
-                    <h2 className='text-black text-xl ml-4'>{fullName}</h2>
+                    <h2 className='text-text text-xl ml-4'>{fullName}</h2>
                 </div>
             </div>
             <div className='grid grid-cols-2 grid-rows-3 gap-x-12 mt-8'>
                 <div className='self-start space-y-12'>
-                    <form className="flex h-12 w-full max-w-md items-center gap-2 overflow-hidden rounded-full border border-gray-500/30 bg-white">
-                        <input type="text" placeholder="First Name" className="h-full bg-transparent w-full pl-6 text-sm placeholder-gray-500 outline-none" onChange={(e) => {
+                    <form className="flex h-12 w-full max-w-md items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-background">
+                        <input type="text" placeholder="First Name" className="h-full bg-transparent w-full pl-6 text-sm placeholder-text/50 outline-none" onChange={(e) => {
                             dispatch(setFirstName(e.target.value))
                         }} required />
                     </form>
-                    <form className="flex h-12 w-full max-w-md items-center gap-2 overflow-hidden rounded-full border border-gray-500/30 bg-white">
-                        <input type="email" placeholder="Email" className="h-full bg-transparent w-full pl-6 text-sm placeholder-gray-500 outline-none" required />
+                    <form className="flex h-12 w-full max-w-md items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-background">
+                        <input type="email" placeholder="Email" className="h-full bg-transparent w-full pl-6 text-sm placeholder-text/50 outline-none" required />
                     </form>
                 </div>
                 <div className='self-start space-y-12'>
-                    <form className="flex h-12 w-full max-w-md items-center gap-2 overflow-hidden rounded-full border border-gray-500/30 bg-white">
-                        <input type="text" placeholder="Second Name" className="h-full bg-transparent w-full pl-6 text-sm placeholder-gray-500 outline-none" onChange={(e) => {
+                    <form className="flex h-12 w-full max-w-md items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-background">
+                        <input type="text" placeholder="Second Name" className="h-full bg-transparent w-full pl-6 text-sm placeholder-text/50 outline-none" onChange={(e) => {
                             dispatch(setSecondName(e.target.value))
                         }} />
                     </form>
@@ -70,7 +70,7 @@ export default function Profile() {
                         type="text"
                         value={selectedCountry}
                         onChange={(e) => dispatch(setSelectedCountry(e.target.value))}
-                        className="input flex h-12 w-full max-w-md items-center gap-2 overflow-hidden rounded-full border border-gray-500/30 bg-white"
+                        className="input flex h-12 w-full max-w-md items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-background pl-6 text-sm placeholder-text/50 outline-none"
                         placeholder="Select your country"
                         list="Countries"
                     />

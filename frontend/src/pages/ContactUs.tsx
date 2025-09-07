@@ -3,40 +3,40 @@ export default function ContactUs() {
   return (
     <>
       <NavBar />
-      <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 mt-16">
+      <div className="flex justify-center items-center min-h-screen px-4 bg-background">
         <div className="flex flex-col items-center text-center">
-          <h3 className="text-lg font-medium text-blue-600 mb-2">Contact Us</h3>
-          <h1 className="text-3xl md:text-4xl font-semibold mb-4 text-gray-800">
+          <h3 className="text-lg font-medium text-primary mb-2">Contact Us</h3>
+          <h1 className="text-3xl md:text-4xl font-semibold mb-4 text-text">
             Meet Our Team
           </h1>
-          <p className="w-3/5 mb-14 text-gray-500 text-sm">
+          <p className="w-3/5 mb-14 text-text/80 text-sm">
             Libro store UI has made by{" "}
             <a
               href="https://prebuiltui.com/"
-              className="font-bold text-xl"
+              className="font-bold text-xl text-primary"
               target="_blank"
             >
               PreBuilt UI
             </a>
           </p>
           <div className="flex flex-wrap gap-6 items-center justify-center">
-            <div className="group flex flex-col items-center py-8 text-sm bg-white border border-gray-300/60 w-64 rounded-md  hover:border-blue-600 hover:bg-blue-600 transition">
+            <div className="group flex flex-col items-center py-8 text-sm bg-background border border-primary/20 w-64 rounded-md hover:border-primary hover:bg-primary transition">
               <img
                 className="w-24 rounded-full"
                 src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200"
                 alt="userImage1"
               />
-              <h2 className="text-gray-700 group-hover:text-white text-lg font-medium mt-2">
+              <h2 className="text-text group-hover:text-background text-lg font-medium mt-2">
                 Ahmed Sabah
               </h2>
-              <p className="text-gray-500 group-hover:text-white/80">
+              <p className="text-text/80 group-hover:text-background/80">
                 Front-end
               </p>
-              <p className="text-center text-gray-500/60 group-hover:text-white/60 w-3/4 mt-4">
+              <p className="text-center text-text/60 group-hover:text-background/60 w-3/4 mt-4">
                 a student at UOB that works as a front end developer & UI
                 designer
               </p>
-              <div className="flex items-center space-x-4 mt-6 text-gray-500 group-hover:text-white">
+              <div className="flex items-center space-x-4 mt-6 text-text/80 group-hover:text-background">
                 <a
                   href="https://www.linkedin.com/in/ahmed-sabah-548901372?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                   target="_blank"
@@ -81,22 +81,22 @@ export default function ContactUs() {
               </div>
             </div>
 
-            <div className="group flex flex-col items-center py-8 text-sm bg-white border border-gray-300/60 w-64 rounded-md hover:border-blue-600 hover:bg-blue-600 transition">
+            <div className="group flex flex-col items-center py-8 text-sm bg-background border border-primary/20 w-64 rounded-md hover:border-primary hover:bg-primary transition">
               <img
                 className="w-24 rounded-full"
                 src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200"
                 alt="userImage2"
               />
-              <h2 className="text-gray-700 group-hover:text-white text-lg font-medium mt-2">
+              <h2 className="text-text group-hover:text-background text-lg font-medium mt-2">
                 Ahmed Muhannad
               </h2>
-              <p className="text-gray-500 group-hover:text-white/80">
+              <p className="text-text/80 group-hover:text-background/80">
                 Back-end & Front-end
               </p>
-              <p className="text-center text-gray-500/60 group-hover:text-white/60 w-3/4 mt-4">
+              <p className="text-center text-text/60 group-hover:text-background/60 w-3/4 mt-4">
                 a student at UOB that works as a full stack developer
               </p>
-              <div className="flex items-center space-x-4 mt-6 text-gray-500 group-hover:text-white">
+              <div className="flex items-center space-x-4 mt-6 text-text/80 group-hover:text-background">
                 <a
                   href="https://www.linkedin.com/in/ahmed-mohned-b35a88328?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                   target="_blank"

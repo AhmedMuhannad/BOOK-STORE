@@ -12,7 +12,7 @@ export default function Home() {
   const auth = context?.auth;
   console.log(auth);
   return (
-    <div className="overflow-y-scroll h-screen overflow-x-hidden">
+    <div className="overflow-y-scroll h-screen bg-background overflow-x-hidden">
       <NavBar />
       <HeroSection />
       <SaleSlider />
