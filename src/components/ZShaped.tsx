@@ -3,7 +3,7 @@ import harryPotter from "../../harryPotter.png";
 import science from "../../science.png";
 const ZShaped = () => {
   return (
-    <>
+    <div className="container mx-auto">
       <h1 className="font-bebas text-4xl md:text-5xl text-center p-4 py-6">
         EXPLORE THE WORLD OF BOOKS
       </h1>
@@ -15,7 +15,7 @@ const ZShaped = () => {
             <span className="block py-4 text-gray-400 text-6xl md:text-8xl">
               1
             </span>
-            <h1>
+            <h1 className="text-6xl max-sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl ">
               Step into worlds of magic, mystery, and adventure. Fiction novels
               transport you to places where imagination knows no limits and
               every page invites you to dream.
@@ -26,7 +26,7 @@ const ZShaped = () => {
           <img
             src={harryPotter}
             alt="Fiction"
-            className="w-[90%] sm:w-[60%] md:w-[65%] lg:w-[60%] xl:w-[50%] mx-auto"
+            className="w-[70%] sm:w-[40%] md:w-[45%] lg:w-[55%] xl:w-[60%] mx-auto"
           />
         </div>
 
@@ -35,7 +35,7 @@ const ZShaped = () => {
           <img
             src={science}
             alt="Literature"
-            className="w-[90%] sm:w-[75%] md:w-[65%] lg:w-[60%] xl:w-[50%] mx-auto"
+            className="w-[70%] sm:w-[40%] md:w-[45%] lg:w-[55%] xl:w-[60%] mx-auto"
           />
         </div>
         <div className="flex justify-center items-center order-3 lg:order-4">
@@ -43,7 +43,7 @@ const ZShaped = () => {
             <span className="block py-4 text-gray-400 text-6xl md:text-8xl">
               2
             </span>
-            <h1>
+            <h1 className="text-6xl max-sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl ">
               Timeless stories, powerful words. Literature captures the beauty
               of language and the depth of human experience, offering you
               classics and modern works that inspire reflection.
@@ -57,7 +57,7 @@ const ZShaped = () => {
             <span className="block py-4 text-gray-400 text-6xl md:text-8xl">
               3
             </span>
-            <h1>
+            <h1 className="text-6xl max-sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl ">
               Explore, discover, understand. Science books open doors to
               knowledge, from the wonders of the universe to the marvels of
               everyday life, sparking curiosity at every turn.
@@ -68,11 +68,11 @@ const ZShaped = () => {
           <img
             src={harryPotter}
             alt="Science"
-            className="w-[90%] sm:w-[60%] md:w-[65%] lg:w-[60%] xl:w-[50%] mx-auto"
+            className="w-[70%] sm:w-[40%] md:w-[45%] lg:w-[55%] xl:w-[60%] mx-auto"
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
