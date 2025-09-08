@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCart, addToCart, removeFromCart } from "../api/cartApi";
+import { getCart, addToCart, removeFromCart, clearCart } from "../api/cartApi";
 
 interface CartItem {
   book: {
@@ -15,6 +15,14 @@ const Cart = () => {
   const [showAddress, setShowAddress] = useState(false);
 
   // ✅ Fetch Cart Data
+  async function clearItems() {
+    try {
+      const res = await clearCart();
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  }
   useEffect(() => {
     async function fetchCart() {
       try {
@@ -25,7 +33,7 @@ const Cart = () => {
       }
     }
     fetchCart();
-  }, []);
+  }, [cartItems]);
 
   // ✅ Add Item (Increase Quantity)
   async function addItem(id: string) {
@@ -59,13 +67,11 @@ const Cart = () => {
             {cartItems.length} Items
           </span>
         </h1>
-
         <div className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 text-base font-medium pb-3">
           <p className="text-left">Product Details</p>
           <p className="text-center">Subtotal</p>
           <p className="text-center">Action</p>
         </div>
-
         {cartItems.length === 0 ? (
           <p className="text-gray-400 mt-4">Your cart is currently empty.</p>
         ) : (
@@ -137,25 +143,47 @@ const Cart = () => {
             </div>
           ))
         )}
-
-        <button className="group cursor-pointer flex items-center mt-8 gap-2 text-indigo-500 font-medium">
-          <svg
-            width="15"
-            height="11"
-            viewBox="0 0 15 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        <div className="flex items-center jusstify-around ">
+          <button className="group cursor-pointer flex  flex-1 items-center mt-8  text-indigo-500 font-medium">
+            <svg
+              width="15"
+              height="11"
+              viewBox="0 0 15 11"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1"
+                stroke="#615fff"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Continue Shopping
+          </button>{" "}
+          <button
+            onClick={clearItems}
+            className="group cursor-pointer flex flex-1 justify-center items-center mt-8 gap-2 text-indigo-500 font-medium"
           >
-            <path
-              d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1"
-              stroke="#615fff"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          Continue Shopping
-        </button>
+            <svg
+              width="15"
+              height="11"
+              viewBox="0 0 15 11"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1"
+                stroke="#615fff"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Clear Items
+          </button>
+        </div>
       </div>
 
       {/* ✅ RIGHT SIDE - Order Summary */}
@@ -164,8 +192,8 @@ const Cart = () => {
         <hr className="border-gray-300 my-5" />
 
         <div className="mb-6">
-          <p className="text-sm font-medium uppercase">Delivery Address</p>
-          <div className="relative flex justify-between items-start mt-2">
+          <p className="text-sm font-medium  uppercase">Delivery Address</p>
+          <div className="relative flex  justify-between items-start mt-2">
             <p className="text-gray-500">No address found</p>
             <button
               onClick={() => setShowAddress(!showAddress)}

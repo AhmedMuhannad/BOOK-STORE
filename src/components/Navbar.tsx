@@ -88,7 +88,7 @@ export default function NavBar() {
   console.log(data);
   return (
     <nav
-      className={`sticky  bg-indigo-500 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500  z-50 ${
+      className={`sticky  bg-primary  text-w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500  z-50 ${
         isScrolled
           ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4"
           : "py-4 md:py-6"
@@ -101,7 +101,7 @@ export default function NavBar() {
             key={i}
             href={link.path}
             className={`group flex flex-col gap-0.5 ${
-              isScrolled ? "text-gray-700" : "text-white"
+              isScrolled ? "text-gray-700" : "text-text"
             }`}
           >
             {link.name}

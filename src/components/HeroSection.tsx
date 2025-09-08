@@ -1,4 +1,5 @@
 import useRefreshToken from "../hooks/useRefreshToken";
+import grandPa from "../../grandPa.png";
 
 export default function HeroSection() {
   const refresh = useRefreshToken();
@@ -12,13 +13,16 @@ export default function HeroSection() {
   };
   return (
     <section className=" pb-3 md:pb-6  bg-cover bg-center bg-no-repeat text-slate-800 text-sm">
-      <div className="flex flex-col-reverse gap-10 md:flex-row px-4 md:px-16 lg:px-24 xl:px-32 mt-12 md:mt-32">
-        <div className="max-md:text-center">
-          <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-slate-900 to-[#6D8FE4] text-transparent bg-clip-text">
+      <div className="flex max-sm:flex-col md:align-items md:justify-around md:flex-row px-4 md:px-16 lg:px-24 xl:px-32 mt-12 md:mt-32">
+        <div
+          className="max-md:text-center flex flex-col gap-4
+        "
+        >
+          <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-slate-900 to-[#6D8FE4] text-transparent max-sm:text-[48px] s max-sm:text-left  bg-clip-text">
             Your next adventure begins here
           </h5>
 
-          <p className="text-sm md:text-base max-w-lg mt-6 max-md:px-2 text-slate-600">
+          <p className="  max-w-lg mt-6 max-md:px-2 md:text[28px] text-slate-600 max-sm:text-left max-sm:text-[22px] sm:text-[18px] md:text-[24px]">
             discover something new , discounts on your first purchase, and a
             wide range of products to explore. Join us today and start your
             journey with us.
@@ -71,10 +75,10 @@ export default function HeroSection() {
             </button>
           </div>
         </div>
-        <div className="w-full md:max-w-xs lg:max-w-lg">
+        <div className="w-full md:max-w-xs flex justify-center items-center lg:max-w-lg">
           <img
-            className="w-full h-auto"
-            src="../public/hand-drawn-flat-stack-books_23-2149323629.png"
+            className="lg:block md:hidden h-auto  lg:w-[500px]   max-sm:hidden"
+            src={grandPa}
             alt="books"
           />
         </div>
