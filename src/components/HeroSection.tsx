@@ -1,5 +1,5 @@
 import useRefreshToken from "../hooks/useRefreshToken";
-
+import books from "../../books.png";
 export default function HeroSection() {
   const refresh = useRefreshToken();
   const handleClick = async () => {
@@ -11,17 +11,16 @@ export default function HeroSection() {
     }
   };
   return (
-    <section className="  pb-3 md:pb-6 bg-cover bg-center bg-no-repeat text-text text-sm">
+    <section className="container mx-auto  my-24  pb-3 md:pb-6 bg-cover bg-center bg-no-repeat text-text text-sm">
       <div className="flex flex-col-reverse gap-10 md:flex-row px-4 md:px-16 lg:px-24 xl:px-32">
-        <div className="max-md:text-center">
-          <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-text to-accent text-transparent bg-clip-text">
-            Your next adventure begins here
+        <div className="max-md:text-center flex flex-col gap-3">
+          <h5 className="font-bebas xl:text-8xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-text to-accent text-transparent bg-clip-text">
+            START READING
           </h5>
 
-          <p className="text-sm md:text-base max-w-lg mt-6 max-md:px-2 text-text/80">
+          <p className="xl:text-3xl   md:text-base max-w-lg mt-6 max-md:px-2 text-text/80">
             discover something new , discounts on your first purchase, and a
-            wide range of products to explore. Join us today and start your
-            journey with us.
+            wide range of products to explore.
           </p>
           <div className="flex items-center gap-4 mt-6">
             <button
@@ -67,16 +66,12 @@ export default function HeroSection() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>Get Started</span>
+              <span className="text-1xl">Get Started</span>
             </button>
           </div>
         </div>
         <div className="w-full md:max-w-xs lg:max-w-lg">
-          <img
-            className="w-full h-auto"
-            src="../public/hand-drawn-flat-stack-books_23-2149323629.png"
-            alt="books"
-          />
+          <img className="w-full h-auto" src={books} alt="books" />
         </div>
       </div>
     </section>

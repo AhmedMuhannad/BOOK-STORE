@@ -7,6 +7,7 @@ import NavBar from "../components/Navbar";
 import Categories from "../components/Categories";
 import AuthContext from "../context/AutrhProvider";
 import { useContext } from "react";
+import ZShaped from "../components/ZShaped";
 export default function Home() {
   const context = useContext(AuthContext);
   const auth = context?.auth;
@@ -18,6 +19,7 @@ export default function Home() {
       <SaleSlider />
       <DiscountBanner />
       <Categories />
+      <ZShaped />
     </div>
   );
 }

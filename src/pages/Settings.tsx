@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavBar from "../components/Navbar";
 import Profile from "../components/Profile";
-import type { RootState } from "../App/store";
+import type { RootState } from "../store/store";
 import LogOutModal from "../components/LogOutModal";
 
 import { FaRegUserCircle } from "react-icons/fa";
@@ -28,10 +28,11 @@ export default function Settings() {
     return (
       <div
         key={item.id}
-        className={`flex flex-row items-center p-3 cursor-pointer transition-all duration-200 ${isSelected
-          ? "bg-primary/10 border-r-4 border-primary text-primary"
-          : "text-text/80 hover:bg-secondary/30"
-          } ${isDangerItem ? "hover:bg-accent/10 hover:text-accent" : ""}`}
+        className={`flex flex-row items-center p-3 cursor-pointer transition-all duration-200 ${
+          isSelected
+            ? "bg-primary/10 border-r-4 border-primary text-primary"
+            : "text-text/80 hover:bg-secondary/30"
+        } ${isDangerItem ? "hover:bg-accent/10 hover:text-accent" : ""}`}
         onClick={() => setSelectedItem(item.id)}
       >
         <span className="mr-3 hidden md:inline">{item.Icon}</span>
@@ -51,13 +52,17 @@ export default function Settings() {
           {/* Content based on selected item */}
           {selectedItem === 1 && (
             <div className="h-full">
-              <h1 className="text-2xl font-bold mb-4 text-text">Profile Settings</h1>
+              <h1 className="text-2xl font-bold mb-4 text-text">
+                Profile Settings
+              </h1>
               <Profile />
             </div>
           )}
           {selectedItem === 2 && (
             <div>
-              <h1 className="text-2xl font-bold mb-4 text-text">Favorite Books</h1>
+              <h1 className="text-2xl font-bold mb-4 text-text">
+                Favorite Books
+              </h1>
               {/* Add favorite books content here */}
             </div>
           )}
@@ -73,4 +78,4 @@ export default function Settings() {
       </div>
     </div>
   );
-};
+}

@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setName, setBio, setAvatar } from "../features/ProfileSlice";
 import NavBar from "../components/Navbar";
-import type { RootState } from "../App/store";
+import type { RootState } from "../store/store";
 import { MdModeEdit } from "react-icons/md";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const { name, bio, Avatar } = useSelector((state: RootState) => state.ProfileSlice);
+  const { name, bio, Avatar } = useSelector(
+    (state: RootState) => state.ProfileSlice
+  );
   const [showDialog, setShowDialog] = useState(false);
 
   const handleSave = () => {
@@ -40,7 +42,9 @@ const ProfilePage = () => {
                 className="w-full h-full rounded-full object-cover border-4 border-transparent group-hover:border-blue-500 transition-all duration-300"
               />
               <label className="absolute inset-0 flex items-center justify-center bg-black/60 bg-opacity-50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                <span className="text-xl "><MdModeEdit/></span>
+                <span className="text-xl ">
+                  <MdModeEdit />
+                </span>
                 <input
                   type="file"
                   accept="image/*"
@@ -49,7 +53,9 @@ const ProfilePage = () => {
                 />
               </label>
             </div>
-            <h2 className="text-3xl font-bold text-white tracking-wide">{name || "Guest"}</h2>
+            <h2 className="text-3xl font-bold text-white tracking-wide">
+              {name || "Guest"}
+            </h2>
           </div>
 
           {/* Section 2: Description */}

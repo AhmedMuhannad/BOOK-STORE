@@ -10,7 +10,7 @@ import { getBooks } from "../api/booksApi";
 import { logoutUser } from "../api/userApi";
 import { setAvatar } from "../features/ProfileSlice";
 import { useSelector } from "react-redux";
-import type { RootState } from "../App/store";
+import type { RootState } from "../store/store";
 
 export default function NavBar() {
   const Avatar = useSelector((state: RootState) => state.ProfileSlice.Avatar);
@@ -86,10 +86,11 @@ export default function NavBar() {
   console.log(data);
   return (
     <nav
-      className={`sticky m bg-secondary w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500  ${isScrolled
+      className={`sticky m bg-secondary w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500  ${
+        isScrolled
           ? "bg-background/80 shadow-md text-text backdrop-blur-lg py-3 md:py-4"
           : "py-4 md:py-6"
-        }`}
+      }`}
     >
       {/* Desktop Nav */}
       <div className="hidden md:flex items-center gap-4 lg:gap-8 mr-4">
@@ -97,7 +98,7 @@ export default function NavBar() {
           <a
             key={i}
             href={link.path}
-            className='group flex flex-col gap-0.5 text-text'
+            className="group flex flex-col gap-0.5 text-text"
           >
             {link.name}
             <div className="bg-accent h-0.5 w-0 group-hover:w-full transition-all duration-300" />
@@ -144,11 +145,7 @@ export default function NavBar() {
                         });
                       }}
                     >
-                      <img
-                        className="h-[120px]"
-                        src={book.coverImage}
-                        alt=""
-                      />{" "}
+                      <img className="h-[120px]" src={book.coverImage} alt="" />{" "}
                       <h1 className="line-clamp-1 text-text">{book.title}</h1>
                     </div>
                   );
@@ -170,15 +167,19 @@ export default function NavBar() {
         ) : (
           <p></p>
         )}
-        {!auth ? (<button
-          className="bg-primary text-background px-8 py-2.5 rounded-full transition-all duration-500 flex flex-row justify-between items-center gap-2 hover:bg-primary/90"
-          onClick={() => {
-            handleAuthClick();
-          }}
-        >
-          Login
-          <IoLogInOutline />
-        </button>) : (<p></p>)}
+        {!auth ? (
+          <button
+            className="bg-primary text-background px-8 py-2.5 rounded-full transition-all duration-500 flex flex-row justify-between items-center gap-2 hover:bg-primary/90"
+            onClick={() => {
+              handleAuthClick();
+            }}
+          >
+            Login
+            <IoLogInOutline />
+          </button>
+        ) : (
+          <p></p>
+        )}
       </div>
 
       {/* Mobile Menu Button */}
@@ -232,11 +233,7 @@ export default function NavBar() {
                         });
                       }}
                     >
-                      <img
-                        className="h-[120px]"
-                        src={book.coverImage}
-                        alt=""
-                      />{" "}
+                      <img className="h-[120px]" src={book.coverImage} alt="" />{" "}
                       <h1 className="line-clamp-1 text-text">{book.title}</h1>
                     </div>
                   );
@@ -248,8 +245,9 @@ export default function NavBar() {
       </div>
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-screen bg-background text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-text transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`fixed top-0 left-0 w-full h-screen bg-background text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-text transition-all duration-500 ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <button
           className="absolute top-4 right-4 text-text"
@@ -276,7 +274,12 @@ export default function NavBar() {
           }}
         />
         {navLinks.map((link, i) => (
-          <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)} className="text-text hover:text-accent">
+          <a
+            key={i}
+            href={link.path}
+            onClick={() => setIsMenuOpen(false)}
+            className="text-text hover:text-accent"
+          >
             {link.name}
           </a>
         ))}
@@ -288,7 +291,7 @@ export default function NavBar() {
           }}
         >
           {!auth ? "Login" : ""}
-          {!auth ? (<IoLogInOutline />) : (<p></p>)}
+          {!auth ? <IoLogInOutline /> : <p></p>}
         </button>
       </div>
     </nav>
