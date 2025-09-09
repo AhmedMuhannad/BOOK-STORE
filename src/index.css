@@ -1,17 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Epunda+Slab:ital,wght@0,300..900;1,300..900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epunda+Slab:ital,wght@0,300..900;1,300..900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
-@theme {
-  --font-epunda: "Epunda Slab";
-  --font-bebas: "Bebas Neue";
-  --color-primary: #6b4f4f;
-  --color-secondary: #d9cab3;
-  --color-accent: #a44a3f;
-  --color-background: #f2ede4;
-  --color-text: #f7f4f0;
+@theme{
+   --color-primary: #6B4F4F;
+    --color-secondary: #D9CAB3;
+    --color-accent: #A44A3F;
+    --color-background: #F2EDE4;
+    --color-text: #2E2E2E;
 }
-
-body {
-  background-color: var(--color-background);
+body{
+    background-color:#F2EDE4 ;
 }

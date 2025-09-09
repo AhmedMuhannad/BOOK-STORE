@@ -36,20 +36,20 @@ export default function Details() {
   const Details = () => {
     return (
       book && (
-        <div className="max-w-6xl  w-full px-6">
+        <div className="max-w-6xl w-full px-6">
           <div className="flex flex-col md:flex-row gap-8 md:gap-16 mt-4">
             <div className="flex justify-center md:justify-start">
-              <div className="border border-gray-500/30 rounded  w-full max-w-xs md:max-w-sm lg:max-w-md">
+              <div className="border border-primary/20 rounded w-full max-w-xs md:max-w-sm lg:max-w-md">
                 <img
                   src={book.coverImage}
                   alt={book.title}
-                  className="w-full h-auto lg:w-[340px]   "
+                  className="w-full h-auto lg:w-[340px]"
                 />
               </div>
             </div>
 
             <div className="text-sm w-full md:w-1/2">
-              <h1 className="text-3xl font-medium">{book.title}</h1>
+              <h1 className="text-3xl font-medium text-text">{book.title}</h1>
 
               <div className="flex items-center gap-0.5 mt-1">
                 {/* {Array(5)
@@ -96,8 +96,8 @@ export default function Details() {
                 {/* <p className="text-base ml-2">({product.rating})</p> */}
               </div>
 
-              <p className="text-base font-medium mt-6">About The Book</p>
-              <h3>{book.description}</h3>
+              <p className="text-base font-medium mt-6 text-text">About The Book</p>
+              <h3 className="text-text/80">{book.description}</h3>
 
               <div className="flex items-center mt-10 gap-4 text-base">
                 <button
@@ -105,11 +105,11 @@ export default function Details() {
                     console.log(book._id);
                     addItem(book._id, 3);
                   }}
-                  className="w-full py-3.5 cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 transition"
+                  className="w-full py-3.5 cursor-pointer font-medium bg-secondary text-text hover:bg-secondary/80 transition"
                 >
                   Add to Cart
                 </button>
-                <button className="w-full py-3.5 cursor-pointer font-medium bg-indigo-500 text-white hover:bg-indigo-600 transition">
+                <button className="w-full py-3.5 cursor-pointer font-medium bg-primary text-background hover:bg-primary/90 transition">
                   Buy now
                 </button>
               </div>
@@ -122,7 +122,7 @@ export default function Details() {
                       });
                     }}
                     key={category._id}
-                    className="inline-block bg-gray-200 text-gray-800 text-[12px] px-2 py-1 rounded mt-4 mr-2 cursor-pointer"
+                    className="inline-block bg-secondary text-text text-[12px] px-2 py-1 rounded mt-4 mr-2 cursor-pointer hover:bg-secondary/80 transition"
                   >
                     {category.name}
                   </button>
@@ -137,11 +137,9 @@ export default function Details() {
   return (
     <>
       <NavBar />
-      <div className="flex pt-20  justify-center flex-col items-start md:items-center w-full py-8 md:py-0  md:mt-8">
-        {/* <div className=" my-120 lg:my-40 md:my-80 sm:my-100 xs:my-120"></div> */}
+      <div className="flex pt-20 justify-center flex-col items-start md:items-center w-full py-8 md:py-0 md:mt-8 bg-background">
         <Details />
         <SimilarSlider id={location.state.item} />
-        {/* <SimilarBooks /> */}
       </div>
     </>
   );

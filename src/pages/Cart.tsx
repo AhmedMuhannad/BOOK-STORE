@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCart, addToCart, removeFromCart, clearCart } from "../api/cartApi";
+import { getCart, addToCart, removeFromCart } from "../api/cartApi";
 
 interface CartItem {
   book: {
@@ -15,14 +15,6 @@ const Cart = () => {
   const [showAddress, setShowAddress] = useState(false);
 
   // ✅ Fetch Cart Data
-  async function clearItems() {
-    try {
-      const res = await clearCart();
-      return res;
-    } catch (err) {
-      throw err;
-    }
-  }
   useEffect(() => {
     async function fetchCart() {
       try {
@@ -33,7 +25,7 @@ const Cart = () => {
       }
     }
     fetchCart();
-  }, [cartItems]);
+  }, []);
 
   // ✅ Add Item (Increase Quantity)
   async function addItem(id: string) {
@@ -58,30 +50,32 @@ const Cart = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row py-16 max-w-6xl w-full px-6 mx-auto">
+    <div className="flex flex-col md:flex-row py-16 h-screen w-full px-6 bg-background mx-auto">
       {/* ✅ LEFT SIDE - Cart Items */}
       <div className="flex-1 max-w-4xl">
-        <h1 className="text-3xl font-medium mb-6">
+        <h1 className="text-3xl font-medium mb-6 text-text">
           Shopping Cart{" "}
-          <span className="text-sm text-indigo-500">
+          <span className="text-sm text-primary">
             {cartItems.length} Items
           </span>
         </h1>
-        <div className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 text-base font-medium pb-3">
+
+        <div className="grid grid-cols-[2fr_1fr_1fr] text-text/80 text-base font-medium pb-3">
           <p className="text-left">Product Details</p>
           <p className="text-center">Subtotal</p>
           <p className="text-center">Action</p>
         </div>
+
         {cartItems.length === 0 ? (
-          <p className="text-gray-400 mt-4">Your cart is currently empty.</p>
+          <p className="text-text/60 mt-4">Your cart is currently empty.</p>
         ) : (
           cartItems.map((item) => (
             <div
               key={item.book._id}
-              className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 items-center text-sm md:text-base font-medium pt-3"
+              className="grid grid-cols-[2fr_1fr_1fr] text-text/80 items-center text-sm md:text-base font-medium pt-3"
             >
               <div className="flex items-center md:gap-6 gap-3">
-                <div className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded overflow-hidden">
+                <div className="cursor-pointer w-24 h-24 flex items-center justify-center border border-primary/20 rounded overflow-hidden">
                   <img
                     className="max-w-full h-full object-cover"
                     src={item.book.coverImage}
@@ -89,10 +83,10 @@ const Cart = () => {
                   />
                 </div>
                 <div>
-                  <p className="hidden md:block font-semibold">
+                  <p className="hidden md:block font-semibold text-text">
                     {item.book.title}
                   </p>
-                  <div className="font-normal text-gray-500/70">
+                  <div className="font-normal text-text/60">
                     <div className="flex items-center">
                       <p>Qty:</p>
                       <select
@@ -105,7 +99,7 @@ const Cart = () => {
                             removeItem(item.book._id);
                           }
                         }}
-                        className="outline-none"
+                        className="outline-none bg-background"
                       >
                         {Array(5)
                           .fill("")
@@ -119,7 +113,7 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-              <p className="text-center">${item.quantity * 20}</p>
+              <p className="text-center text-text">${item.quantity * 20}</p>
               <button
                 className="cursor-pointer mx-auto"
                 onClick={() => removeItem(item.book._id)}
@@ -143,75 +137,53 @@ const Cart = () => {
             </div>
           ))
         )}
-        <div className="flex items-center jusstify-around ">
-          <button className="group cursor-pointer flex  flex-1 items-center mt-8  text-indigo-500 font-medium">
-            <svg
-              width="15"
-              height="11"
-              viewBox="0 0 15 11"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1"
-                stroke="#615fff"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Continue Shopping
-          </button>{" "}
-          <button
-            onClick={clearItems}
-            className="group cursor-pointer flex flex-1 justify-center items-center mt-8 gap-2 text-indigo-500 font-medium"
+
+        <button className="group cursor-pointer flex items-center mt-8 gap-2 text-text font-medium">
+          <svg
+            width="15"
+            height="11"
+            viewBox="0 0 15 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              width="15"
-              height="11"
-              viewBox="0 0 15 11"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1"
-                stroke="#615fff"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Clear Items
-          </button>
-        </div>
+            <path
+              d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Continue Shopping
+        </button>
       </div>
 
       {/* ✅ RIGHT SIDE - Order Summary */}
-      <div className="max-w-[360px] w-full bg-gray-100/40 p-5 max-md:mt-16 border border-gray-300/70">
-        <h2 className="text-xl md:text-xl font-medium">Order Summary</h2>
-        <hr className="border-gray-300 my-5" />
+      <div className="max-w-[360px] w-full bg-secondary/40 p-5 max-md:mt-16 border border-primary/20">
+        <h2 className="text-xl md:text-xl font-medium text-text">Order Summary</h2>
+        <hr className="border-primary/20 my-5" />
 
         <div className="mb-6">
-          <p className="text-sm font-medium  uppercase">Delivery Address</p>
-          <div className="relative flex  justify-between items-start mt-2">
-            <p className="text-gray-500">No address found</p>
+          <p className="text-sm font-medium uppercase text-text">Delivery Address</p>
+          <div className="relative flex justify-between items-start mt-2">
+            <p className="text-text/60">No address found</p>
             <button
               onClick={() => setShowAddress(!showAddress)}
-              className="text-indigo-500 hover:underline cursor-pointer"
+              className="text-primary hover:underline cursor-pointer"
             >
               Change
             </button>
             {showAddress && (
-              <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
+              <div className="absolute top-12 py-1 bg-background border border-primary/20 text-sm w-full">
                 <p
                   onClick={() => setShowAddress(false)}
-                  className="text-gray-500 p-2 hover:bg-gray-100"
+                  className="text-text/60 p-2 hover:bg-secondary/30"
                 >
                   New York, USA
                 </p>
                 <p
                   onClick={() => setShowAddress(false)}
-                  className="text-indigo-500 text-center cursor-pointer p-2 hover:bg-indigo-500/10"
+                  className="text-primary text-center cursor-pointer p-2 hover:bg-primary/10"
                 >
                   Add address
                 </p>
@@ -219,17 +191,17 @@ const Cart = () => {
             )}
           </div>
 
-          <p className="text-sm font-medium uppercase mt-6">Payment Method</p>
+          <p className="text-sm font-medium uppercase mt-6 text-text">Payment Method</p>
 
-          <select className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
+          <select className="w-full border border-primary/20 bg-background px-3 py-2 mt-2 outline-none text-text">
             <option value="COD">Cash On Delivery</option>
             <option value="Online">Online Payment</option>
           </select>
         </div>
 
-        <hr className="border-gray-300" />
+        <hr className="border-primary/20" />
 
-        <div className="text-gray-500 mt-4 space-y-2">
+        <div className="text-text/80 mt-4 space-y-2">
           <p className="flex justify-between">
             <span>Price</span>
             <span>
@@ -251,7 +223,7 @@ const Cart = () => {
               ).toFixed(2)}
             </span>
           </p>
-          <p className="flex justify-between text-lg font-medium mt-3">
+          <p className="flex justify-between text-lg font-medium mt-3 text-text">
             <span>Total Amount:</span>
             <span>
               $
@@ -265,7 +237,7 @@ const Cart = () => {
           </p>
         </div>
 
-        <button className="w-full py-3 mt-6 cursor-pointer bg-indigo-500 text-white font-medium hover:bg-indigo-600 transition">
+        <button className="w-full py-3 mt-6 cursor-pointer bg-secondary text-text font-medium hover:bg-secondary/60 transition">
           Place Order
         </button>
       </div>
