@@ -60,8 +60,6 @@ export default function NavBar() {
   function handleClickLogin(): void {
     if (auth) {
       navigate("/");
-    } else {
-      navigate("/login");
     }
   }
 
@@ -88,11 +86,10 @@ export default function NavBar() {
   console.log(data);
   return (
     <nav
-      className={`sticky  bg-primary  text-w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500  z-50 ${
-        isScrolled
-          ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4"
+      className={`sticky m bg-secondary w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500  ${isScrolled
+          ? "bg-background/80 shadow-md text-text backdrop-blur-lg py-3 md:py-4"
           : "py-4 md:py-6"
-      }`}
+        }`}
     >
       {/* Desktop Nav */}
       <div className="hidden md:flex items-center gap-4 lg:gap-8 mr-4">
@@ -100,33 +97,27 @@ export default function NavBar() {
           <a
             key={i}
             href={link.path}
-            className={`group flex flex-col gap-0.5 ${
-              isScrolled ? "text-gray-700" : "text-text"
-            }`}
+            className='group flex flex-col gap-0.5 text-text'
           >
             {link.name}
-            <div
-              className={`${
-                isScrolled ? "bg-gray-700" : "bg-white"
-              } h-0.5 w-0 group-hover:w-full transition-all duration-300`}
-            />
+            <div className="bg-accent h-0.5 w-0 group-hover:w-full transition-all duration-300" />
           </a>
         ))}
       </div>
 
       {/* Desktop Right */}
       <div className="hidden md:flex items-center ml- gap-4">
-        <div className="relative flex items-center border pl-3 gap-2 bg-white border-gray-500/30  rounded-md  max-w-md w-full h-[60px]">
+        <div className="relative flex items-center border pl-3 gap-2 bg-background border-primary/30 rounded-md max-w-md w-full h-[60px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22"
             height="22"
             viewBox="0 0 30 30"
-            fill="#6B7280"
+            className="text-text"
           >
             <path d="M13 3C7.489 3 3 7.489 3 13s4.489 10 10 10a9.95 9.95 0 0 0 6.322-2.264l5.971 5.971a1 1 0 1 0 1.414-1.414l-5.97-5.97A9.95 9.95 0 0 0 23 13c0-5.511-4.489-10-10-10m0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8-8-3.57-8-8 3.57-8 8-8" />
           </svg>
-          <div className=" w-full h-[40px] pl-4">
+          <div className="w-full h-[40px] pl-4">
             <input
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
@@ -136,14 +127,14 @@ export default function NavBar() {
               }}
               type="text"
               placeholder="Search for products"
-              className={`w-[200px] h-full outline-none text-gray-500 transition-all  duration-600 placeholder-gray-500 text-sm`}
+              className="w-[200px] h-full outline-none text-text transition-all duration-600 placeholder-text/70 text-sm bg-background"
             />
             {data.books && inputValue && (
-              <div className="absolute w-full h-[200px]  overflow-y-scroll p-1 top-full left-0 right-0 bg-white">
+              <div className="absolute w-full h-[200px] overflow-y-scroll p-1 top-full left-0 right-0 bg-background border border-primary/20 shadow-lg">
                 {data.books.map((book) => {
                   return (
                     <div
-                      className="flex gap-4 py-4  items-center"
+                      className="flex gap-4 py-4 items-center hover:bg-secondary/50 cursor-pointer"
                       key={book._id}
                       onClick={() => {
                         setInputValue("");
@@ -154,11 +145,11 @@ export default function NavBar() {
                       }}
                     >
                       <img
-                        className="h-[120px] "
+                        className="h-[120px]"
                         src={book.coverImage}
                         alt=""
                       />{" "}
-                      <h1 className="line-clamp-1 ">{book.title}</h1>
+                      <h1 className="line-clamp-1 text-text">{book.title}</h1>
                     </div>
                   );
                 })}
@@ -166,38 +157,35 @@ export default function NavBar() {
             )}
           </div>
         </div>
-        <button
-          className={`px-1 py-2.5 cursor-pointer rounded-full ml-4 transition-all duration-500 flex flex-row justify-between items-center gap-2 ${
-            isScrolled ? "text-white bg-black" : "bg-white text-black"
-          }`}
-          onClick={() => {
-            handleAuthClick();
-          }}
-        >
-          {auth ? "LogOut" : "Login"}{" "}
-          {auth ? <IoLogOutOutline /> : <IoLogInOutline />}
-        </button>
+
         {auth ? (
           <img
-            className="h-15 w-15 rounded-full ml-4 hover:cursor-pointer"
+            className="h-15 w-15 rounded-full ml-4 hover:cursor-pointer "
             src={Avatar}
             alt="userImage1"
             onClick={() => {
-              navigate("/Profile");
+              navigate("/Settings");
             }}
           />
         ) : (
           <p></p>
         )}
+        {!auth ? (<button
+          className="bg-primary text-background px-8 py-2.5 rounded-full transition-all duration-500 flex flex-row justify-between items-center gap-2 hover:bg-primary/90"
+          onClick={() => {
+            handleAuthClick();
+          }}
+        >
+          Login
+          <IoLogInOutline />
+        </button>) : (<p></p>)}
       </div>
 
       {/* Mobile Menu Button */}
       <div className="flex items-center justify-between w-full gap-3 md:hidden">
         <svg
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`h-6 w-6 cursor-pointer ${
-            isScrolled ? "invert" : ""
-          } text-white`}
+          className="h-6 w-6 cursor-pointer text-text"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -207,18 +195,17 @@ export default function NavBar() {
           <line x1="4" y1="12" x2="20" y2="12" />
           <line x1="4" y1="18" x2="20" y2="18" />
         </svg>
-        <div className="relative ml-auto flex items-center border pl-3 gap-2 bg-white border-gray-500/30  rounded-md  max-w-md w-2/3 h-[40px]">
+        <div className="relative ml-auto flex items-center border pl-3 gap-2 bg-background border-primary/30 rounded-md max-w-md w-2/3 h-[40px]">
           <svg
-            className="absolute"
+            className="absolute text-text"
             xmlns="http://www.w3.org/2000/svg"
             width="22"
             height="22"
             viewBox="0 0 30 30"
-            fill="#6B7280"
           >
             <path d="M13 3C7.489 3 3 7.489 3 13s4.489 10 10 10a9.95 9.95 0 0 0 6.322-2.264l5.971 5.971a1 1 0 1 0 1.414-1.414l-5.97-5.97A9.95 9.95 0 0 0 23 13c0-5.511-4.489-10-10-10m0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8-8-3.57-8-8 3.57-8 8-8" />
           </svg>
-          <div className=" w-full h-[40px] pl-4">
+          <div className="w-full h-[40px] pl-4">
             <input
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
@@ -228,14 +215,14 @@ export default function NavBar() {
               }}
               type="text"
               placeholder="Search for products"
-              className={`w-[200px] h-full outline-none text-gray-500 transition-all  duration-600 placeholder-gray-500 text-sm ml-2`}
+              className="w-[200px] h-full outline-none text-text transition-all duration-600 placeholder-text/70 text-sm ml-2 bg-background"
             />
             {data.books && inputValue && (
-              <div className="absolute w-full h-[200px]  overflow-y-scroll p-1 top-full left-0 right-0 bg-white">
+              <div className="absolute w-full h-[200px] overflow-y-scroll p-1 top-full left-0 right-0 bg-background border border-primary/20 shadow-lg">
                 {data.books.map((book) => {
                   return (
                     <div
-                      className="flex gap-4 py-4  items-center"
+                      className="flex gap-4 py-4 items-center hover:bg-secondary/50 cursor-pointer"
                       key={book._id}
                       onClick={() => {
                         setInputValue("");
@@ -246,11 +233,11 @@ export default function NavBar() {
                       }}
                     >
                       <img
-                        className="h-[120px] "
+                        className="h-[120px]"
                         src={book.coverImage}
                         alt=""
                       />{" "}
-                      <h1 className="line-clamp-1 ">{book.title}</h1>
+                      <h1 className="line-clamp-1 text-text">{book.title}</h1>
                     </div>
                   );
                 })}
@@ -261,12 +248,11 @@ export default function NavBar() {
       </div>
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-screen bg-white text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 transition-all duration-500 ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 w-full h-screen bg-background text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-text transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <button
-          className="absolute top-4 right-4"
+          className="absolute top-4 right-4 text-text"
           title="menu"
           onClick={() => setIsMenuOpen(false)}
         >
@@ -290,19 +276,19 @@ export default function NavBar() {
           }}
         />
         {navLinks.map((link, i) => (
-          <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)}>
+          <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)} className="text-text hover:text-accent">
             {link.name}
           </a>
         ))}
 
         <button
-          className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500 flex flex-row justify-between items-center gap-2"
+          className="bg-primary text-background px-8 py-2.5 rounded-full transition-all duration-500 flex flex-row justify-between items-center gap-2 hover:bg-primary/90"
           onClick={() => {
             handleAuthClick();
           }}
         >
-          {auth ? "LogOut" : "Login"}{" "}
-          {auth ? <IoLogOutOutline /> : <IoLogInOutline />}
+          {!auth ? "Login" : ""}
+          {!auth ? (<IoLogInOutline />) : (<p></p>)}
         </button>
       </div>
     </nav>

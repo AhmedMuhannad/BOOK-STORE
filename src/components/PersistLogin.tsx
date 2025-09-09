@@ -4,7 +4,6 @@ import useRefreshToken from "../hooks/useRefreshToken";
 import AuthContext from "../context/AutrhProvider";
 const PersistLogin = () => {
   const { auth } = useContext(AuthContext)!;
-  console.log("yourr auth is: ", auth);
   const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
   useEffect(() => {

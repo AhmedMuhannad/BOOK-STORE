@@ -10,7 +10,7 @@ import Category from "./pages/Category";
 import PersistLogin from "./components/PersistLogin";
 import Cart from "./pages/Cart";
 import SignUp from "./pages/SignUp";
-import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 function App() {
   return (
     <div>
@@ -27,7 +27,7 @@ function App() {
           <Route path=":id/category" element={<Category />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/SignUp" element={<SignUp/>}/>
-          <Route path="/Profile" element={<Profile/>}/>
+          <Route path="/Settings" element={<Settings/>}/>
         </Route>
       </Routes>
     </div>

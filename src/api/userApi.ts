@@ -29,14 +29,9 @@ export const getRefreshToken = async (): Promise<Book> => {
 
 export const logoutUser = async (): Promise<void> => {
   try {
-    const res = await apiBase.post(
-      "/api/user/logout",
-      {},
-      {
-        withCredentials: true,
-      }
-    );
-    console.log("you have been logged out :) ", res.data);
+    const res = await apiBase.post("/api/user/logout", {
+      withCredentials: true,
+    });
     return res.data;
   } catch (err: any) {
     throw err;
