@@ -14,7 +14,7 @@ export default function HeroSection() {
     <section className="container mx-auto  my-24  pb-3 md:pb-6 bg-cover bg-center bg-no-repeat text-text text-sm">
       <div className="flex flex-col-reverse gap-10 md:flex-row px-4 md:px-16 lg:px-24 xl:px-32">
         <div className="max-md:text-center flex flex-col gap-3">
-          <h5 className="font-bebas xl:text-8xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-text to-accent text-transparent bg-clip-text">
+          <h5 className="font-bebas xl:text-8xl md:text-6xl font-semibold max-w-xl bg-gradient-to-r from-text text-4xl to-accent text-transparent bg-clip-text">
             START READING
           </h5>
 

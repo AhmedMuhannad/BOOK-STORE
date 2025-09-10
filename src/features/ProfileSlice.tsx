@@ -7,6 +7,7 @@ const ProfileSlice = createSlice({
         secondName: "",
         Avatar: "https://lh3.googleusercontent.com/a/default-user",
         selectedCountry:"",
+        phoneNumber:"",
     },
     reducers: {
         setFirstName: (state, action: PayloadAction<string>) => {
@@ -21,7 +22,10 @@ const ProfileSlice = createSlice({
         setSelectedCountry:(state,action:PayloadAction<string>)=>{
             state.selectedCountry=action.payload
         },
+        setPhoneNumber:(state,action:PayloadAction<string>)=>{
+            state.phoneNumber=action.payload
+        }
     }
 })
-export const { setFirstName, setSecondName, setAvatar,setSelectedCountry } = ProfileSlice.actions
+export const { setFirstName, setSecondName, setAvatar,setSelectedCountry,setPhoneNumber } = ProfileSlice.actions
 export default ProfileSlice.reducer
