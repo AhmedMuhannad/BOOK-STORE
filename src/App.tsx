@@ -11,6 +11,7 @@ import PersistLogin from "./components/PersistLogin";
 import Cart from "./pages/Cart";
 import SignUp from "./pages/SignUp";
 import Settings from "./pages/Settings";
+import Products from "./pages/Products";
 function App() {
   return (
     <div>
@@ -19,7 +20,7 @@ function App() {
         {" "}
         <Route element={<PersistLogin />}>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<div>Products</div>} />
+          <Route path="/Products" element={<Products/>} />
           <Route path=":id/Details" element={<Details />} />
           <Route path="*" element={<Error404 />} />
           <Route path="/contactus" element={<ContactUs />} />
